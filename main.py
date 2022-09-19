@@ -1,24 +1,39 @@
 from player import Player
 import os, sys
 
-player1 = Player(name="김정욱")
-while(True):      
-    player1.Roll()
-    turn = True
-    while(turn == True):
-        os.system("clear")
-        print(f"{player1.name}님의 주사위 : {player1.dices}")
-        if input().upper() == 'B':
+def play(player, round):
+    turn = 1
+    player.Roll()
+    while(turn <= 3):
+        os.system("cls")
+        print(f"ROUND [{round}/12]\tNAME [{player.name}]\tTURN [{turn}/3]\n\n")
+        print(f"{player.dices}\n\n")
+        print("R : 다시 굴리기, B : 점수판 보기")
+        mainCommand = input().upper()
+        if mainCommand == 'B': # 보드 확인 커맨드 입력 시
             boardView = True
             while(True):
-                os.system("clear")
-                boardResult = player1.ShowBoard().upper()
-                if boardResult == 'B':
+                os.system("cls")
+                boardCommand = player.ShowBoard().upper()
+                if boardCommand == 'B': # 다시 주사위 확인
                     break
-                elif boardResult == '1':
-                    player1.status += player1.handRankings['ace']['check']
-                    print(player1.status)
-                    turn = False
-                    break
-                else:
+                elif boardCommand in player.handRankings.keys(): # 점수 입력 후 턴 종료
+                    if player.status & player.handRankings[boardCommand]['check'] == 0: # 아직 점수가 들어가지 않은 족보가 입력될 시
+                        player.status += player.handRankings[boardCommand]['check']
+                        turn = 999
+                        break
+                    else:
+                        pass
+                else: # 예외 입력, 다시 보드 확인 루프 진입
                     pass
+        elif mainCommand == 'R': # 주사위 다시 굴리기 커맨드 입력 시
+            if turn != 3:
+                player.Roll()
+                turn += 1
+
+player1 = Player(name="김정욱")
+player2 = Player(name="송수진")
+
+for round in range(1, 13):
+    play(player1, round)
+    play(player2, round)
