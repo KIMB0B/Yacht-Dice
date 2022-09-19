@@ -7,11 +7,12 @@ BRIGHT_RED = '\033[91m'
 END = '\033[0m'
 BOLD = '\033[1m'
 class Player:
+    """
+        한명의 유져 클래스입니다.
+            args : name->사용자명(str)
+            return : 유져 클래스 변수(Player)
+        """
     def __init__(self, name: str):
-        """
-        explain : 유져 클래스
-        args : name->사용자명(str)
-        """
         self.name = name
         self.status = 0
         self.score = 0
@@ -19,7 +20,11 @@ class Player:
         self.handRankings = {}
 
     def Roll(self):
-        """ 해당 플레이어의 주사위를 굴리고 족보 점수를 갱신합니다. """
+        """ 
+        해당 플레이어의 주사위를 굴리고 족보 점수를 갱신합니다. 
+            args : none
+            return : none
+        """
         self.dices.clear()
         for i in range(0, 5):
             self.dices.append(random.randint(1, 6))
@@ -42,7 +47,8 @@ class Player:
     def ShowBoard(self):
         """ 
         점수판을 확인하고, 명령어를 입력받습니다. 
-        return : 점수판 확인 후 실행할 명령어
+            args : none
+            return : 점수판 확인 후 실행할 명령어(str)
         """
         print(BRIGHT_WHITE_BG+BLACK+"┌------------------┬------┐"+END)
         print(BRIGHT_WHITE_BG+BLACK+"| 족보             | 점수 |"+END)

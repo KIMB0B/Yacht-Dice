@@ -1,11 +1,23 @@
 from player import Player
 import os, sys
+import platform
 
-def play(player, round):
+# 운영체제에 따라 터미널 명령어 변경
+if platform.system() == 'Windows':
+    close = 'cls'
+else:
+    close = 'close'
+
+def play(player:Player, round:int):
+    """
+    플레이어 한명의 한 라운드를 진행합니다.
+        args :  player->Player클래스 변수의 하나의 플레이어
+                round->현재의 라운드
+    """
     turn = 1
     player.Roll()
     while(turn <= 3):
-        os.system("cls")
+        os.system(close)
         print(f"ROUND [{round}/12]\tNAME [{player.name}]\tTURN [{turn}/3]\n\n")
         print(f"{player.dices}\n\n")
         print("R : 다시 굴리기, B : 점수판 보기")
@@ -13,7 +25,7 @@ def play(player, round):
         if mainCommand == 'B': # 보드 확인 커맨드 입력 시
             boardView = True
             while(True):
-                os.system("cls")
+                os.system(close)
                 boardCommand = player.ShowBoard().upper()
                 if boardCommand == 'B': # 다시 주사위 확인
                     break
