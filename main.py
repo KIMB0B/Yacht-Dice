@@ -1,12 +1,11 @@
 from player import Player
-import os, sys
-import platform
+import os, platform
 
 # 운영체제에 따라 터미널 명령어 변경
 if platform.system() == 'Windows':
     close = 'cls'
 else:
-    close = 'close'
+    close = 'clear'
 
 def play(player:Player, round:int):
     """
@@ -14,6 +13,8 @@ def play(player:Player, round:int):
         args :  player->Player클래스 변수의 하나의 플레이어
                 round->현재의 라운드
     """
+    print(f"{player.name}님의 {round}라운드를 시작합니다.")
+    input()
     turn = 1
     player.Roll()
     while(turn <= 3):
@@ -21,9 +22,8 @@ def play(player:Player, round:int):
         print(f"ROUND [{round}/12]\tNAME [{player.name}]\tTURN [{turn}/3]\n\n")
         print(f"{player.dices}\n\n")
         print("R : 다시 굴리기, B : 점수판 보기")
-        mainCommand = input().upper()
+        mainCommand = input("->").upper()
         if mainCommand == 'B': # 보드 확인 커맨드 입력 시
-            boardView = True
             while(True):
                 os.system(close)
                 boardCommand = player.ShowBoard().upper()
@@ -42,6 +42,8 @@ def play(player:Player, round:int):
             if turn != 3:
                 player.Roll()
                 turn += 1
+    os.system(close)
+    print(f"{player.name}님이 {player.handRankings[boardCommand]['name']}에 {player.handRankings[boardCommand]['score']}점을 넣고 {round}라운드를 종료했습니다.\n\n")
 
 player1 = Player(name="김정욱")
 player2 = Player(name="송수진")

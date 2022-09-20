@@ -57,5 +57,5 @@ class Player:
             print(BRIGHT_WHITE_BG+BLACK+"├------------------┼------┤"+END)
             print(BRIGHT_WHITE_BG+BLACK+"| " + color + f"{i}. {'%-13s' % self.handRankings[i]['name']}" + END + BRIGHT_WHITE_BG + BLACK + " | " + color + f"{'%-3s' % self.handRankings[i]['score']}점" + END + BRIGHT_WHITE_BG + BLACK + "|"+END)
         print(BRIGHT_WHITE_BG+BLACK+"└------------------┴------┘"+END)
-        print("\nB : 돌아가기, 1~= : 점수 입력")
-        return input()
+        print("\nB : 돌아가기, 1 ~ = : 점수 입력")
+        return input("->")
