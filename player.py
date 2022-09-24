@@ -7,6 +7,7 @@ if platform.system() == 'Windows':
 else:
     close = 'clear'
 
+""" 글자/배경 색 설정 """
 BLACK_BG = '\033[40m'
 BRIGHT_WHITE_BG = '\033[107m'
 BLACK = '\033[30m'
@@ -56,7 +57,6 @@ class Player:
                     self.handRankings[key].update({'score' : len([i for i in self.dices if i == int(key)])*int(key)})
                 elif key == '7': # CHOICE 보드판 점수 확인
                     self.handRankings[key].update({'score' : sum(self.dices)})
-        ## 점수가 아직 입력되지 않은 족보의 점수 확인 ##
     
     def ShowBoard(self):
         """ 
@@ -78,8 +78,9 @@ class Player:
         """
         플레이어 한명의 한 라운드를 진행합니다.
             args :  round->현재의 라운드
+            return : none
         """
-        print(f"{self.name}님의 {round}라운드를 시작합니다.")
+        print(f"{self.name}님의 {round}라운드를 시작합니다.\n\nPress Enter...")
         input()
         turn = 1
         self.Roll()
